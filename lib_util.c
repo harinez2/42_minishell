@@ -3,7 +3,7 @@
 void	copy_array(int *to, int *from, int len, int offset_to)
 {
 	int		i;
-	
+
 	i = 0;
 	while (i < len)
 	{

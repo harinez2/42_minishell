@@ -97,7 +97,7 @@ static int	command_recog(char *read, t_arg *arg)
 
 	if (ft_strncmp("exit", read, 5) == 0)
 		return (-1);
-	else if(check_builtincmd(read, arg))
+	else if (check_builtincmd(read, arg))
 		;
 	else
 	{

@@ -18,7 +18,7 @@ void	lst_addlast(t_cmd *cmd, char *s, int len)
 	while (i < len)
 	{
 		c->argv[i] = s[i];
-		i++:
+		i++;
 	}
 	c->argv[i] = '\0';
 	c->next = NULL;
