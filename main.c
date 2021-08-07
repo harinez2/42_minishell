@@ -63,7 +63,7 @@ int	lexical_analysis(char *read)
 	return (0);
 }
 
-static int	check_builtincmd(char *read, t_arg *arg)
+static int	run_builtincmd(char *read, t_arg *arg)
 {
 	if (ft_strncmp("echo ", read, 5) == 0)
 		buitincmd_echo(read);
@@ -97,7 +97,7 @@ static int	command_recog(char *read, t_arg *arg)
 
 	if (ft_strncmp("exit", read, 5) == 0)
 		return (-1);
-	else if (check_builtincmd(read, arg))
+	else if (run_builtincmd(read, arg))
 		;
 	else
 	{
