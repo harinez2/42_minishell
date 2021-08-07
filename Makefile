@@ -1,9 +1,11 @@
 NAME		= minishell
 SRCS		= \
+				error.c \
 				lib_ft.c \
 				lib_ft2.c \
 				lib_util.c \
-				error.c \
+				builtin_echo.c \
+				builtin_export.c \
 				cmd_exec.c \
 				cmd_pipe.c \
 				main.c

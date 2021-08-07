@@ -1,5 +1,17 @@
 #include "main.h"
 
+void	copy_array(int *to, int *from, int len, int offset_to)
+{
+	int		i;
+	
+	i = 0;
+	while (i < len)
+	{
+		to[offset_to + i] = from[i];
+		i++;
+	}
+}
+
 void	secure_free(void *p)
 {
 	if (p != NULL)
@@ -15,6 +27,7 @@ void	init_arg(int argc, char **argv, char **envp, t_arg *arg)
 
 	arg->argc = argc;
 	arg->argv = argv;
+	arg->envp = envp;
 	i = 0;
 	arg->path_cnt = 0;
 	while (envp[i] != NULL)
