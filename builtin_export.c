@@ -1,18 +1,5 @@
 #include "main.h"
 
-// static void	print_arr(int *arr, int start, int end)
-// {
-// 	int		i;
-
-// 	i = start;
-// 	while (i < end)
-// 	{
-// 		printf("[%d] %d ", i, arr[i]);
-// 		i++;
-// 	}
-// 	printf("\n");
-// }
-
 static int	get_bigger_len(char *s1, char *s2)
 {
 	int		ret;

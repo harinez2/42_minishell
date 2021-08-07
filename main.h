@@ -62,7 +62,6 @@ void	pipe_and_runcommand(t_arg *arg, int nestcnt);
 // builtin_echo.c
 void	buitincmd_echo(char *read);
 // builtin_export.c
-//void	buitincmd_export(t_arg *arg);
 void	buitincmd_export(char **envp);
 
 #endif
