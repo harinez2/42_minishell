@@ -63,8 +63,8 @@ void	buitincmd_export(char **envp)
 		envp_i[cnt] = cnt;
 		cnt++;
 	}
-	mergesort_envp(envp_i, envp, 0, cnt);
+	mergesort_envp(envp_i, envp, 0, --cnt);
 	i = 0;
 	while (i < cnt)
-		printf("declare -x \"%s\"\n", envp[envp_i[i++]]);
+		printf("%s\n", envp[envp_i[i++]]);
 }
