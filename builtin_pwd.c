@@ -1,17 +1,9 @@
 #include "main.h"
 
-void	buitincmd_pwd(char **envp)
+void	buitincmd_pwd(void)
 {
-	int		i;
+	char	path[MAX_PATH];
 
-	i = 0;
-	while (envp[i] != NULL)
-	{
-		if (ft_strncmp("PWD=", envp[i], 4) == 0)
-		{
-			printf("%s\n", &envp[i][4]);
-			break ;
-		}
-		i++;
-	}
+	getcwd(path, MAX_PATH);
+	printf("%s\n", path);
 }

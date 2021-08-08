@@ -4,6 +4,7 @@ SRCS		= \
 				lib_ft.c \
 				lib_ft2.c \
 				lib_util.c \
+				builtin_cd.c \
 				builtin_echo.c \
 				builtin_export.c \
 				builtin_pwd.c \

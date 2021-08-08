@@ -1,5 +1,15 @@
 #include "main.h"
 
+void	print_error(int errcode, char *txt)
+{
+	if (errcode == ERR_CD_INVALIDPATH)
+	{
+		write(2, "Error : ", 8);
+		write(2, txt, ft_strlen(txt));
+		perror(" ");
+	}
+}
+
 void	error_exit(int errcode, t_arg *arg)
 {
 	if (errcode == ERR_ENV_INVALID)

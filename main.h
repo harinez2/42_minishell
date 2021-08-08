@@ -12,6 +12,7 @@
 # include <fcntl.h>
 
 # define	MAX_ENVP				100
+# define	MAX_PATH				1024
 
 # define	PP_READ					0
 # define	PP_WRITE				1
@@ -22,6 +23,8 @@
 # define	ERR_FAILED_TO_FORK		-5
 # define	ERR_FAILED_TO_EXEC		-6
 # define	ERR_FAILED_TO_MALLOC	-7
+
+# define	ERR_CD_INVALIDPATH		-8
 
 typedef struct s_arg
 {
@@ -41,6 +44,7 @@ typedef struct	s_cmd
 }	t_cmd;
 
 // error.c
+void	print_error(int errcode, char *txt);
 void	error_exit(int errcode, t_arg *arg);
 // lib_ft.c
 size_t	ft_strlen(const char *str);
@@ -50,6 +54,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 // lib_ft2.c
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
+char	*ft_strjoin(char const *s1, char const *s2);
 // lib_util.c
 void	copy_array(int *to, int *from, int len, int offset_to);
 void	secure_free(void *p);
@@ -59,11 +64,13 @@ void	free_param(char **cmd_with_param);
 void	exec_command(char *cmd, t_arg *arg);
 // cmd_pipe.c
 void	pipe_and_runcommand(t_arg *arg, int nestcnt);
+// builtin_cd.c
+void	buitincmd_cd(char *read);
 // builtin_echo.c
 void	buitincmd_echo(char *read);
 // builtin_export.c
 void	buitincmd_export(char **envp);
 // builtin_pwd.c
-void	buitincmd_pwd(char **envp);
+void	buitincmd_pwd(void);
 
 #endif
