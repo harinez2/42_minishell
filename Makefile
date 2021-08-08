@@ -6,6 +6,7 @@ SRCS		= \
 				lib_util.c \
 				builtin_echo.c \
 				builtin_export.c \
+				builtin_pwd.c \
 				cmd_exec.c \
 				cmd_pipe.c \
 				main.c

@@ -69,6 +69,8 @@ static int	run_builtincmd(char *read, t_arg *arg)
 		buitincmd_echo(read);
 	else if (ft_strncmp("export", read, 7) == 0)
 		buitincmd_export(arg->envp);
+	else if (ft_strncmp("pwd", read, 4) == 0)
+		buitincmd_pwd(arg->envp);
 	else
 		return (0);
 	return (1);
