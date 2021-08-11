@@ -64,3 +64,31 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	t[i] = '\0';
 	return (t);
 }
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t		srclen;
+	size_t		dstlen;
+	size_t		i;
+	char		*t;
+
+	srclen = (size_t)ft_strlen(s);
+	if ((size_t)start < srclen)
+	{
+		dstlen = len;
+		if ((size_t)start + len > srclen)
+			dstlen = srclen - (size_t)start;
+	}
+	else
+		dstlen = 0;
+	if (!(t = malloc(sizeof(char) * (dstlen + 1))))
+		return (NULL);
+	i = 0;
+	while (i < dstlen)
+	{
+		t[i] = s[(size_t)start + i];
+		i++;
+	}
+	t[i] = '\0';
+	return (t);
+}

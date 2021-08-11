@@ -28,6 +28,7 @@ void	init_arg(int argc, char **argv, char **envp, t_arg *arg)
 	arg->argc = argc;
 	arg->argv = argv;
 	arg->envp = envp;
+	arg->cmdlst = NULL;
 	i = 0;
 	arg->path_cnt = 0;
 	while (envp[i] != NULL)
