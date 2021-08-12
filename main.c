@@ -97,15 +97,15 @@ static void	print_token_type(int type)
 static int	run_builtincmd(char *read, t_arg *arg)
 {
 	if (ft_strncmp("echo ", read, 5) == 0)
-		buitincmd_echo(read);
+		builtincmd_echo(read);
 	else if (ft_strncmp("export", read, 7) == 0)
-		buitincmd_export(arg->envp);
+		builtincmd_export(arg->envp);
 	else if (ft_strncmp("env", read, 3) == 0)
-		buitincmd_env();
+		builtincmd_env();
 	else if (ft_strncmp("pwd", read, 4) == 0)
-		buitincmd_pwd();
+		builtincmd_pwd();
 	else if (ft_strncmp("cd ", read, 3) == 0)
-		buitincmd_cd(read);
+		builtincmd_cd(read);
 	else
 		return (0);
 	return (1);

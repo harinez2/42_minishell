@@ -51,7 +51,7 @@ static void	mergesort_envp(int *envp_i, char **envp, int start, int end)
 	mergesort_merge_envp(envp_i, envp, start, end);
 }
 
-void	buitincmd_export(char **envp)
+void	builtincmd_export(char **envp)
 {
 	int		cnt;
 	int		i;

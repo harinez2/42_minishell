@@ -90,14 +90,14 @@ void	exec_command(char *cmd, t_arg *arg);
 // cmd_pipe.c
 void	pipe_and_runcommand(t_arg *arg, int nestcnt);
 // builtin_cd.c
-void	buitincmd_cd(char *read);
+void	builtincmd_cd(char *read);
 // builtin_echo.c
-void	buitincmd_echo(char *read);
+void	builtincmd_echo(char *read);
 // builtin_env.c
-void	buitincmd_env(void);
+void	builtincmd_env(void);
 // builtin_export.c
-void	buitincmd_export(char **envp);
+void	builtincmd_export(char **envp);
 // builtin_pwd.c
-void	buitincmd_pwd(void);
+void	builtincmd_pwd(void);
 
 #endif

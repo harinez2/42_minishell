@@ -1,6 +1,6 @@
 #include "main.h"
 extern char **environ;
-void	buitincmd_env(void)
+void	builtincmd_env(void)
 {
 	int		i;
 
