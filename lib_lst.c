@@ -11,11 +11,14 @@ void	lst_print(t_cmd *c)
 	{
 		printf("[%d]\n", i);
 		printf("  cmd      : %s\n", c->cmd);
-		ptmp = c->param;
-		while (ptmp != NULL)
+		if (c->param != NULL)
 		{
-			printf("    param  : %s\n", ptmp->p);
-			ptmp = ptmp->next;
+			ptmp = c->param;
+			while (ptmp != NULL)
+			{
+				printf("    param  : %s\n", ptmp->p);
+				ptmp = ptmp->next;
+			}
 		}
 		printf("  nxtrel   : %d\n", c->nxtcmd_relation);
 		if (c->redir_in == NULL)
@@ -51,6 +54,7 @@ void	lst_addlast(t_arg *arg, char *cmdtxt, int len)
 		i++;
 	}
 	(c->cmd)[i] = '\0';
+	c->param = NULL;
 	c->nxtcmd_relation = 0;
 	c->redir_in = NULL;
 	c->redir_out = NULL;
