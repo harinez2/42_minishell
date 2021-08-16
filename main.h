@@ -17,6 +17,7 @@
 
 # define	PP_READ					0
 # define	PP_WRITE				1
+
 # define	ERR_ENV_INVALID			-1
 # define	ERR_NOT_ENOUGH_PARAM	-2
 # define	ERR_FAILED_TO_OPEN_FILE	-3
@@ -24,7 +25,6 @@
 # define	ERR_FAILED_TO_FORK		-5
 # define	ERR_FAILED_TO_EXEC		-6
 # define	ERR_FAILED_TO_MALLOC	-7
-
 # define	ERR_CD_INVALIDPATH		-8
 
 # define	TKN_DBLQUOTE			11
@@ -50,8 +50,8 @@ typedef struct	s_cmd
 	char			*cmd;
 	t_param			*param;
 	int				nxtcmd_relation;
-	char			*redir_in;
-	char			*redir_out;
+	char			**redir_in;
+	char			**redir_out;
 }	t_cmd;
 
 typedef struct s_arg
@@ -83,7 +83,9 @@ void	copy_array(int *to, int *from, int len, int offset_to);
 void	secure_free(void *p);
 void	init_arg(int argc, char **argv, char **envp, t_arg *arg);
 // lib_lst.c
-void	lst_addlast(t_arg *arg, t_cmd *cmd, char *cmdtxt, int len);
+void	lst_print(t_cmd *c);
+void	lst_addlast(t_arg *arg, char *cmdtxt, int len);
+void	lst_destroy(t_arg *arg, t_cmd *cmd);
 // cmd_exec.c
 void	free_param(char **cmd_with_param);
 void	exec_command(char *cmd, t_arg *arg);

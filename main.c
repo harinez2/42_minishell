@@ -134,7 +134,7 @@ static void		add_tree(t_arg *arg, int type, char *cmdtxt, int len)
 	else if (type == TKN_CHAR)
 	{
 		if (arg->cmdlst == NULL)
-			lst_addlast(arg, arg->cmdlst, cmdtxt, len);
+			lst_addlast(arg, cmdtxt, len);
 	}
 }
 
@@ -165,6 +165,7 @@ static int	command_recog(char *read, t_arg *arg)
 			secure_free(s);
 		}
 		add_tree(arg, token_type, &read[starti], i - starti);
+		lst_print(arg->cmdlst);
 	}
 	return (0);
 
