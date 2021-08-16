@@ -20,6 +20,8 @@ void	lst_print(t_cmd *c)
 				ptmp = ptmp->next;
 			}
 		}
+		else
+			printf("    param  : <NULL>\n");
 		printf("  nxtrel   : %d\n", c->nxtcmd_relation);
 		if (c->redir_in == NULL)
 			printf("  redir_in : <NULL>\n");
@@ -35,10 +37,9 @@ void	lst_print(t_cmd *c)
 	printf("---lst_print_end---\n");
 }
 
-void	lst_addlast(t_arg *arg, char *cmdtxt, int len)
+static t_cmd	*create_cmdnode(t_arg *arg, char *cmdtxt, int len)
 {
 	t_cmd	*c;
-	t_cmd	*d;
 	int		i;
 
 	c = malloc(sizeof(t_cmd));
@@ -59,7 +60,15 @@ void	lst_addlast(t_arg *arg, char *cmdtxt, int len)
 	c->redir_in = NULL;
 	c->redir_out = NULL;
 	c->next = NULL;
+	return (c);
+}
 
+void	lst_addlast(t_arg *arg, char *cmdtxt, int len)
+{
+	t_cmd	*c;
+	t_cmd	*d;
+
+	c = create_cmdnode(arg, cmdtxt, len);
 	d = arg->cmdlst;
 	if (d == NULL)
 		arg->cmdlst = c;

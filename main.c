@@ -114,7 +114,7 @@ static int	run_builtincmd(char *read, t_arg *arg)
 static void		add_tree(t_arg *arg, int type, char *cmdtxt, int len)
 {
 	if (type == TKN_DBLQUOTE)
-		;
+		lst_addlast(arg, cmdtxt, len);
 	else if (type == TKN_SGLQUOTE)
 		;
 	else if (type == TKN_COLON)
