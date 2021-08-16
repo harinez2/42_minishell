@@ -71,9 +71,21 @@ void	lst_addlast(t_arg *arg, char *cmdtxt, int len)
 	}
 }
 
-void	lst_destroy(t_arg *arg, t_cmd *cmd)
+void	lst_destroy(t_arg *arg)
 {
-	// t_cmd	*c;
-	(void)arg;
-	(void)cmd;
+	t_cmd	*c;
+
+	while (arg->cmdlst != NULL)
+	{
+		c = arg->cmdlst;
+		arg->cmdlst = arg->cmdlst->next;
+		if (c->param != NULL)
+			secure_free(c->param);
+		if (c->redir_in != NULL)
+			secure_free(c->redir_in);
+		if (c->redir_out != NULL)
+			secure_free(c->redir_out);
+		secure_free(c->cmd);
+		secure_free(c);
+	}
 }

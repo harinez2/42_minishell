@@ -85,7 +85,7 @@ void	init_arg(int argc, char **argv, char **envp, t_arg *arg);
 // lib_lst.c
 void	lst_print(t_cmd *c);
 void	lst_addlast(t_arg *arg, char *cmdtxt, int len);
-void	lst_destroy(t_arg *arg, t_cmd *cmd);
+void	lst_destroy(t_arg *arg);
 // cmd_exec.c
 void	free_param(char **cmd_with_param);
 void	exec_command(char *cmd, t_arg *arg);
