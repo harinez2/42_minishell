@@ -37,7 +37,7 @@ void	lst_print(t_cmd *c)
 	printf("---lst_print_end---\n");
 }
 
-static t_cmd	*create_cmdnode(t_arg *arg, char *cmdtxt, int len)
+t_cmd	*create_cmdnode(t_arg *arg, char *cmdtxt, int len)
 {
 	t_cmd	*c;
 	int		i;
@@ -65,18 +65,18 @@ static t_cmd	*create_cmdnode(t_arg *arg, char *cmdtxt, int len)
 
 void	lst_addlast(t_arg *arg, char *cmdtxt, int len)
 {
-	t_cmd	*c;
-	t_cmd	*d;
+	t_cmd	*newnode;
+	t_cmd	*ctmp;
 
-	c = create_cmdnode(arg, cmdtxt, len);
-	d = arg->cmdlst;
-	if (d == NULL)
-		arg->cmdlst = c;
+	newnode = create_cmdnode(arg, cmdtxt, len);
+	if (arg->cmdlst == NULL)
+		arg->cmdlst = newnode;
 	else
 	{
-		while (d->next != NULL)
-			d = d->next;
-		d->next = c;
+		ctmp = arg->cmdlst;
+		while (ctmp->next != NULL)
+			ctmp = ctmp->next;
+		ctmp->next = newnode;
 	}
 }
 
