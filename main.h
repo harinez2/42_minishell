@@ -18,6 +18,9 @@
 # define	PP_READ					0
 # define	PP_WRITE				1
 
+# define	PNT_CMD					1
+# define	PNT_PARAM				2
+
 # define	ERR_ENV_INVALID			-1
 # define	ERR_NOT_ENOUGH_PARAM	-2
 # define	ERR_FAILED_TO_OPEN_FILE	-3
@@ -38,17 +41,18 @@
 # define	TKN_DBLANDOR			19
 # define	TKN_CHAR				20
 
-typedef struct	s_param
-{
-	char			*p;
-	struct s_param	*next;
-}	t_param;
+// typedef struct	s_param
+// {
+// 	char			*p;
+// 	struct s_param	*next;
+// }	t_param;
 
 typedef struct	s_cmd
 {
 	struct s_cmd	*next;
 	char			*cmd;
-	t_param			*param;
+	char			*param[100];
+	int				param_cnt;
 	int				nxtcmd_relation;
 	char			**redir_in;
 	char			**redir_out;
@@ -84,7 +88,7 @@ void	secure_free(void *p);
 void	init_arg(int argc, char **argv, char **envp, t_arg *arg);
 // lib_lst.c
 void	lst_print(t_cmd *c);
-void	lst_addlast(t_arg *arg, char *cmdtxt, int len);
+int		lst_addlast(t_arg *arg, int addpoint, char *cmdtxt, int len);
 void	lst_destroy(t_arg *arg);
 // cmd_exec.c
 void	free_param(char **cmd_with_param);
