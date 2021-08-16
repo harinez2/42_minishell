@@ -92,7 +92,7 @@ void	exec_command(char *cmd, t_arg *arg);
 // cmd_pipe.c
 void	pipe_and_runcommand(t_arg *arg, int nestcnt);
 // builtin_cd.c
-void	builtincmd_cd(char *read);
+void	builtincmd_cd(t_arg *arg, char *read);
 // builtin_echo.c
 void	builtincmd_echo(char *read);
 // builtin_env.c

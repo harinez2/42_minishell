@@ -105,7 +105,7 @@ static int	run_builtincmd(char *read, t_arg *arg)
 	else if (ft_strncmp("pwd", read, 4) == 0)
 		builtincmd_pwd();
 	else if (ft_strncmp("cd ", read, 3) == 0)
-		builtincmd_cd(read);
+		builtincmd_cd(arg, read);
 	else
 		return (0);
 	return (1);
@@ -165,8 +165,9 @@ static int	command_recog(char *read, t_arg *arg)
 		}
 		add_tree(arg, token_type, &read[starti], i - starti);
 	}
-	lst_print(arg->cmdlst);
-	lst_destroy(arg, arg->cmdlst);
+	if (arg->dbg == 1)
+		lst_print(arg->cmdlst);
+	lst_destroy(arg);
 
 	return (0);
 
@@ -202,9 +203,10 @@ int	main(int argc, char **argv, char **envp)
 	int		ret;
 	t_arg	arg;
 
-	arg.dbg = 1;
 	arg.path[0] = NULL;
 	init_arg(argc, argv, envp, &arg);
+	if (argc >= 2 && ft_strncmp("-d", argv[1], 3) == 0)
+		arg.dbg = 1;
 	while (1)
 	{
 		read = readline("minishell> ");

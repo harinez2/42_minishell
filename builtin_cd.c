@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	builtincmd_cd(char *read)
+void	builtincmd_cd(t_arg *arg, char *read)
 {
 	int		i;
 	int		ret;
@@ -11,5 +11,6 @@ void	builtincmd_cd(char *read)
 	ret = chdir(&read[i]);
 	if (ret)
 		print_error(ERR_CD_INVALIDPATH, &read[i]);
-	builtincmd_pwd();
+	if (arg->dbg == 1)
+		builtincmd_pwd();
 }

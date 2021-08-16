@@ -50,4 +50,5 @@ void	init_arg(int argc, char **argv, char **envp, t_arg *arg)
 		i++;
 	}
 	arg->path[arg->path_cnt] = NULL;
+	arg->dbg = 0;
 }
