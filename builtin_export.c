@@ -51,12 +51,14 @@ static void	mergesort_envp(int *envp_i, char **envp, int start, int end)
 	mergesort_merge_envp(envp_i, envp, start, end);
 }
 
-void	builtincmd_export(char **envp)
+void	builtincmd_export(t_arg *arg, char **envp)
 {
 	int		cnt;
 	int		i;
 	int		envp_i[MAX_ENVP];
 
+	if (arg->dbg == 1)
+		printf("<<< builtin cmd export >>>\n");
 	cnt = 0;
 	while (envp[cnt] != NULL)
 	{

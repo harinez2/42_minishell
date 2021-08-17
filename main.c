@@ -97,13 +97,13 @@ static void	print_token_type(int type)
 static int	run_builtincmd(char *read, t_arg *arg)
 {
 	if (ft_strncmp("echo ", read, 5) == 0)
-		builtincmd_echo(read);
+		builtincmd_echo(arg, read);
 	else if (ft_strncmp("export", read, 7) == 0)
-		builtincmd_export(arg->envp);
+		builtincmd_export(arg, arg->envp);
 	else if (ft_strncmp("env", read, 3) == 0)
-		builtincmd_env();
+		builtincmd_env(arg);
 	else if (ft_strncmp("pwd", read, 4) == 0)
-		builtincmd_pwd();
+		builtincmd_pwd(arg);
 	else if (ft_strncmp("cd ", read, 3) == 0)
 		builtincmd_cd(arg, read);
 	else
@@ -137,15 +137,43 @@ static void		add_tree(t_arg *arg, int type, char *cmdtxt, int len)
 	}
 }
 
-static int	command_recog(char *read, t_arg *arg)
+static int	fork_for_running_cmd(t_arg *arg)
 {
 	pid_t	pid;
+	t_cmd	*c;
 	int		status;
+
+	c = arg->cmdlst;
+	while (c != NULL)
+	{
+		if (ft_strncmp("exit", c->cmd, 5) == 0)
+			return (-1);
+		else if (run_builtincmd(c->cmd, arg))
+			;
+		else
+		{
+			pid = fork();
+			if (pid == -1)
+				error_exit(ERR_FAILED_TO_FORK, arg);
+			else if (pid == 0)
+				exec_command(c->cmd, arg);
+			waitpid(pid, &status, 0);
+			// secure_free(arg->path[0]);
+			if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+				return (0);
+			else
+				return (-1);
+		}
+		c = c->next;
+	}
+	return (0);
+}
+
+static int	command_recog(char *read, t_arg *arg)
+{
 	int		i;
 	int		token_type;
 	int		starti;
-
-	run_builtincmd(read, arg);
 	
 	i = 0;
 	token_type = 1;
@@ -167,33 +195,6 @@ static int	command_recog(char *read, t_arg *arg)
 	}
 	if (arg->dbg == 1)
 		lst_print(arg->cmdlst);
-	lst_destroy(arg);
-
-	return (0);
-
-	// exec_command("echo a", arg);
-
-	if (ft_strncmp("exit", read, 5) == 0)
-		return (-1);
-	else if (run_builtincmd(read, arg))
-		;
-	else
-	{
-		pid = fork();
-		if (pid == -1)
-			error_exit(ERR_FAILED_TO_FORK, arg);
-		else if (pid == 0)
-			exec_command(read, arg);
-		waitpid(pid, &status, 0);
-		secure_free(arg->path[0]);
-		if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
-			return (0);
-		else
-			return (-1);
-	}
-
-	// else
-	// 	printf("Command not found : %s\n", read);
 	return (0);
 }
 
@@ -213,6 +214,8 @@ int	main(int argc, char **argv, char **envp)
 		ret = command_recog(read, &arg);
 		if (ret == -1)
 			break ;
+		fork_for_running_cmd(&arg);
+		lst_destroy(&arg);
 		secure_free(read);
 	}
 	secure_free(read);

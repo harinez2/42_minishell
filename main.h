@@ -98,12 +98,12 @@ void	pipe_and_runcommand(t_arg *arg, int nestcnt);
 // builtin_cd.c
 void	builtincmd_cd(t_arg *arg, char *read);
 // builtin_echo.c
-void	builtincmd_echo(char *read);
+void	builtincmd_echo(t_arg *arg, char *read);
 // builtin_env.c
-void	builtincmd_env(void);
+void	builtincmd_env(t_arg *arg);
 // builtin_export.c
-void	builtincmd_export(char **envp);
+void	builtincmd_export(t_arg *arg, char **envp);
 // builtin_pwd.c
-void	builtincmd_pwd(void);
+void	builtincmd_pwd(t_arg *arg);
 
 #endif
