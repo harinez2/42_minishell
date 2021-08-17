@@ -96,15 +96,15 @@ static void	print_token_type(int type)
 
 static int	run_builtincmd(char *read, t_arg *arg)
 {
-	if (ft_strncmp("echo ", read, 5) == 0)
+	if (ft_strncmp("echo", read, 5) == 0)
 		builtincmd_echo(arg, read);
 	else if (ft_strncmp("export", read, 7) == 0)
 		builtincmd_export(arg, arg->envp);
-	else if (ft_strncmp("env", read, 3) == 0)
+	else if (ft_strncmp("env", read, 4) == 0)
 		builtincmd_env(arg);
 	else if (ft_strncmp("pwd", read, 4) == 0)
 		builtincmd_pwd(arg);
-	else if (ft_strncmp("cd ", read, 3) == 0)
+	else if (ft_strncmp("cd", read, 3) == 0)
 		builtincmd_cd(arg, read);
 	else
 		return (0);
@@ -137,7 +137,7 @@ static void		add_tree(t_arg *arg, int type, char *cmdtxt, int len)
 	}
 }
 
-static int	fork_for_running_cmd(t_arg *arg)
+static int	fork_and_cmdrun(t_arg *arg)
 {
 	pid_t	pid;
 	t_cmd	*c;
@@ -214,7 +214,7 @@ int	main(int argc, char **argv, char **envp)
 		ret = command_recog(read, &arg);
 		if (ret == -1)
 			break ;
-		fork_for_running_cmd(&arg);
+		fork_and_cmdrun(&arg);
 		lst_destroy(&arg);
 		secure_free(read);
 	}
