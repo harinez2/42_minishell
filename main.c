@@ -159,10 +159,10 @@ static int	fork_and_cmdrun(t_arg *arg)
 				exec_command(c->cmd, arg);
 			waitpid(pid, &status, 0);
 			// secure_free(arg->path[0]);
-			if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
-				return (0);
-			else
-				return (-1);
+			// if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+			// 	return (0);
+			// else
+			// 	return (-1);
 		}
 		c = c->next;
 	}
