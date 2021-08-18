@@ -137,7 +137,7 @@ static void		add_tree(t_arg *arg, int type, char *cmdtxt, int len)
 	}
 }
 
-static int	fork_and_cmdrun(t_arg *arg)
+static int	fork_and_runcmd(t_arg *arg)
 {
 	pid_t	pid;
 	t_cmd	*c;
@@ -169,7 +169,7 @@ static int	fork_and_cmdrun(t_arg *arg)
 	return (0);
 }
 
-static int	command_recog(char *read, t_arg *arg)
+static int	recog_input(char *read, t_arg *arg)
 {
 	int		i;
 	int		token_type;
@@ -204,17 +204,16 @@ int	main(int argc, char **argv, char **envp)
 	int		ret;
 	t_arg	arg;
 
-	arg.path[0] = NULL;
 	init_arg(argc, argv, envp, &arg);
 	if (argc >= 2 && ft_strncmp("-d", argv[1], 3) == 0)
 		arg.dbg = 1;
 	while (1)
 	{
 		read = readline("minishell> ");
-		ret = command_recog(read, &arg);
+		ret = recog_input(read, &arg);
 		if (ret == -1)
 			break ;
-		fork_and_cmdrun(&arg);
+		fork_and_runcmd(&arg);
 		lst_destroy(&arg);
 		secure_free(read);
 	}
