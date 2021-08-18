@@ -14,6 +14,7 @@
 
 # define	MAX_ENVP				100
 # define	MAX_PATH				1024
+# define	MAX_ARGNUM				100
 
 # define	PP_READ					0
 # define	PP_WRITE				1
@@ -51,7 +52,7 @@ typedef struct	s_cmd
 {
 	struct s_cmd	*next;
 	char			*cmd;
-	char			*param[100];
+	char			*param[MAX_ARGNUM];
 	int				param_cnt;
 	int				nxtcmd_relation;
 	char			**redir_in;
@@ -63,7 +64,7 @@ typedef struct s_arg
 	int		argc;
 	char	**argv;
 	char	**envp;
-	char	*path[100];
+	char	*path[MAX_PATH];
 	int		path_cnt;
 	t_cmd	*cmdlst;
 	int		dbg;
