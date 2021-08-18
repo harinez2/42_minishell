@@ -147,7 +147,10 @@ static int	fork_and_runcmd(t_arg *arg)
 	while (c != NULL)
 	{
 		if (ft_strncmp("exit", c->cmd, 5) == 0)
-			return (-1);
+		{
+			//require memory free
+			exit (0);
+		}
 		else if (run_builtincmd(c->cmd, arg))
 			;
 		else
